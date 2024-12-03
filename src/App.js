@@ -1,24 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
+import { FormoAnalyticsProvider } from '@formo/analytics';
+import MainPage from './components/MainPage';
+
+const API_KEY = process.env.REACT_APP_FORMO_ANALYTICS_API_KEY;
+const PROJECT_ID = process.env.REACT_APP_FORMO_ANALYTICS_PROJECT_ID;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <FormoAnalyticsProvider apiKey={API_KEY} projectId={PROJECT_ID}>
+      <MainPage />
+    </FormoAnalyticsProvider>
   );
 }
 
