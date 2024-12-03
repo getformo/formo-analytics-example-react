@@ -1,3 +1,12 @@
+# 🏗 Formo Analytics React.js Example
+
+[Documentation](https://help.formo.so) |
+[Website](https://formo.so)
+
+This is a working example of a React.js app using Formo Analytics.
+
+-----
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
