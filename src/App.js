@@ -6,7 +6,15 @@ const WRITE_KEY = process.env.REACT_APP_FORMO_ANALYTICS_WRITE_KEY;
 
 function App() {
   return (
-    <FormoAnalyticsProvider writeKey={WRITE_KEY} options={{}}>
+    <FormoAnalyticsProvider
+      writeKey={WRITE_KEY}
+      options={{
+        logger: {
+          enabled: true,
+          levels: ["debug", "info", "error"],
+        },
+      }}
+    >
       <MainPage />
     </FormoAnalyticsProvider>
   );
