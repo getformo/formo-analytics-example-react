@@ -9,7 +9,7 @@ function App() {
     <FormoAnalyticsProvider
       writeKey={WRITE_KEY}
       options={{
-        trackLocalhost: true,
+        tracking: true,
         logger: {
           enabled: true,
           levels: ["debug", "info", "error", "warn", "trace"],
