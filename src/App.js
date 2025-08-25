@@ -10,6 +10,7 @@ function App() {
       writeKey={WRITE_KEY}
       options={{
         tracking: true,
+        flushInterval: 500 * 10, // 5 secs
         logger: {
           enabled: true,
           levels: ["debug", "info", "error", "warn", "trace"],
