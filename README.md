@@ -1,79 +1,170 @@
-# 🏗 Formo Analytics React.js Example
+# Formo Analytics React Example
 
-[Documentation](https://help.formo.so) |
-[Website](https://formo.so)
+This is an example React application that demonstrates how to integrate and use the Formo Analytics SDK for tracking user events and analytics.
 
-This is a working example of a React.js app using Formo Analytics.
+## 🚀 Quick Start
 
------
+### Prerequisites
 
-# Getting Started with Create React App
+- Node.js (version 14 or higher)
+- npm or yarn package manager
+- A Formo Analytics write key
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Installation
 
-## Available Scripts
+1. Clone this repository:
+```bash
+git clone <repository-url>
+cd formo-analytics-example-react
+```
 
-In the project directory, you can run:
+2. Install dependencies:
+```bash
+# Using npm
+npm install
 
-### `npm start`
+# Using yarn
+yarn install
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+3. Set up environment variables:
+Create a `.env` file in the root directory and add your Formo Analytics write key:
+```bash
+REACT_APP_FORMO_ANALYTICS_WRITE_KEY=your_write_key_here
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+4. Start the development server:
+```bash
+# Using npm
+npm start
 
-### `npm test`
+# Using yarn
+yarn start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The app will open in your browser at [http://localhost:3000](http://localhost:3000).
 
-### `npm run build`
+## 📁 Project Structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+src/
+├── App.js              # Main app component with FormoAnalyticsProvider
+├── components/
+│   └── MainPage.js     # Example component demonstrating analytics tracking
+├── App.css             # Styles for the app
+├── index.js            # App entry point
+└── ...
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🔧 How It Works
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 1. Provider Setup
 
-### `npm run eject`
+The app uses the `FormoAnalyticsProvider` to initialize the Formo Analytics SDK:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```javascript
+import { FormoAnalyticsProvider } from "@formo/analytics";
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+function App() {
+  return (
+    <FormoAnalyticsProvider
+      writeKey={WRITE_KEY}
+      options={{
+        tracking: true,
+        logger: {
+          enabled: true,
+          levels: ["debug", "info", "error", "warn", "trace"],
+        },
+      }}
+    >
+      <MainPage />
+    </FormoAnalyticsProvider>
+  );
+}
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 2. Using Analytics in Components
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Components can access the analytics instance using the `useFormo` hook:
 
-## Learn More
+```javascript
+import { useFormo } from "@formo/analytics";
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+function MainPage() {
+  const analytics = useFormo();
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  const handleClick = () => {
+    analytics.track("custom_event", { key: "value" });
+  };
 
-### Code Splitting
+  return (
+    <button onClick={handleClick}>
+      Click here to track click button event
+    </button>
+  );
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 📊 Analytics Configuration
 
-### Analyzing the Bundle Size
+The Formo Analytics SDK is configured with the following options:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- **tracking**: `true` - Enables event tracking
+- **logger**: Configured with debug logging enabled for all levels
 
-### Making a Progressive Web App
+You can modify these options in `src/App.js` based on your needs.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🎯 Available Events
 
-### Advanced Configuration
+This example demonstrates tracking custom events. You can extend it to track various user interactions:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Button clicks
+- Page views
+- Form submissions
+- User authentication events
+- Custom business events
 
-### Deployment
+## 🛠 Available Scripts
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- `npm start` / `yarn start` - Runs the app in development mode
+- `npm test` / `yarn test` - Launches the test runner
+- `npm run build` / `yarn build` - Builds the app for production
+- `npm run eject` / `yarn eject` - Ejects from Create React App (one-way operation)
 
-### `npm run build` fails to minify
+## 📚 Learn More
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [Formo Analytics Documentation](https://docs.formo.ai) - Learn about Formo Analytics features
+- [React Documentation](https://reactjs.org/) - Learn React
+- [Create React App Documentation](https://facebook.github.io/create-react-app/docs/getting-started) - Learn about Create React App
+
+## 🔒 Environment Variables
+
+Make sure to keep your Formo Analytics write key secure:
+
+- Never commit your `.env` file to version control
+- Use different write keys for development and production environments
+- Consider using environment-specific configuration management
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 Support
+
+If you encounter any issues or have questions:
+
+- Check the [Formo Analytics documentation](https://docs.formo.ai)
+- Open an issue in this repository
+- Contact Formo support team
+
+---
+
+Built with ❤️ using React and Formo Analytics
